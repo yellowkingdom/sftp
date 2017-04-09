@@ -11,7 +11,7 @@ RUN chmod +x /app/sshrun/run.sh
 WORKDIR /app/sshrun/
 
 RUN addgroup ssh
-RUN adduser --home /home/ssh ssh -D -s /bin/false -G ssh
+RUN adduser --home /home/ssh --shell /bin/false -D ssh ssh
 
 EXPOSE 22
 ENTRYPOINT ["./run.sh"]
