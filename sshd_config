@@ -1,0 +1,26 @@
+Port 22
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+Protocol 2
+LogLevel INFO
+HostKey /root/.ssh/id_rsa
+PermitRootLogin yes
+AuthorizedKeysFile	/root/.ssh/authorized_keys
+PasswordAuthentication yes
+UsePrivilegeSeparation no
+PermitUserEnvironment yes
+AllowUsers ssh
+GatewayPorts yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+PermitEmptyPasswords no
+TCPKeepAlive yes
+ClientAliveCountMax 360
+ClientAliveInterval 30
+Subsystem sftp internal-sftp
+Match User ssh
+    ChrootDirectory /home/ssh
+    ForceCommand internal-sftp
+    AllowTCPForwarding no
+    X11Forwarding no
