@@ -1,14 +1,21 @@
 #!/bin/sh
 
 
-function _random_string(len, alphabet, alphabet_len, _result, _i) {
+ _random_string(len, alphabet, alphabet_len, _result, _i) {
+    len = $1
+    alphabet = $2
+    alphabet_len = $3
+    _result = $4
+    _i = $5
     for (_i=0; _i<len; _i++) {
         _result = _result alphabet[ random_int(1, alphabet_len) ];
     }
     return _result;
 }
 
-function random_string(opt, len) {
+ random_string() {
+    opt = $1
+    len = $2
     if (!is_define_T) {
         is_define_T = 1;
         T_LEN_LOWER = split("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z", T_LOWER, ",");
@@ -17,11 +24,11 @@ function random_string(opt, len) {
     }
    
     if (opt == "lower") {
-        return _random_string(len, T_LOWER, T_LEN_LOWER);
+        return _random_string len T_LOWER T_LEN_LOWER;
     } else if (opt == "upper") {
-        return _random_string(len, T_UPPER, T_LEN_UPPER);
+        return _random_string len  T_UPPER T_LEN_UPPER;
     } else {
-        return _random_string(len, T_DEFAULT, T_LEN_DEFAULT);
+        return _random_string len T_DEFAULT T_LEN_DEFAULT;
     }
 }
 # random string generater
